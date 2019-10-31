@@ -38,7 +38,7 @@ requested = 0
 """
 
 
-def MineTimelineData(idToMine):
+def MineTimelineData(idToMine, twitterName):
 
     global numberOfTweetsMined
     global numberOfUrls
@@ -51,9 +51,7 @@ def MineTimelineData(idToMine):
 
     # Creating a folder to store our scrapped dataset...
     if not os.path.exists(str(idToMine)):
-        os.makedirs(str(idToMine))
-        os.makedirs(str(idToMine) + '/apiData')
-        os.makedirs(str(idToMine) + '/scrappedData')
+        os.makedirs(str(twitterName))
 
     # This is an (almost) infinite loop. It through all tweets of a user.
     while(tw.Cursor(api.user_timeline).items()):
@@ -121,7 +119,7 @@ def MineTimelineData(idToMine):
 
                             # Writing the decoded text to a file
                             # with the id of the tweet
-                            with open(str(idToMine) +
+                            with open(str(twitterName) +
                                       '/' +
                                       str(tweet.id),
                                       "w+") as f:
@@ -136,7 +134,7 @@ def MineTimelineData(idToMine):
                     else:
 
                         # Writing the text we've got from the twitter API...
-                        with open(str(idToMine) +
+                        with open(str(twitterName) +
                                   '/' +
                                   str(tweet.id),
                                   "w+") as f:
@@ -157,9 +155,10 @@ if __name__ == '__main__':
         minedDataFrame = pd.DataFrame(
             columns=["Tweet Text", "Tweet Created On"])
 
-        user = api.get_user('justinBieber')
+        twitterName = 'revistasuper'
+        user = api.get_user(twitterName)
 
-        MineTimelineData(user.id)
+        MineTimelineData(user.id, twitterName)
     except KeyboardInterrupt:
 
         print(
