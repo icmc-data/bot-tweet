@@ -22,7 +22,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Divider from '@material-ui/core/Divider';
 import Fab from '@material-ui/core/Fab';
 import Twitter from "@material-ui/icons/Twitter";
-
+import TweetCard from "./components/TweetCard/TweetCard";
+import FormHelperText from "@material-ui/core/FormHelperText"
 
 function Copyright() {
   return (
@@ -30,7 +31,7 @@ function Copyright() {
       {/* {'Copyright © '} */}
       Made with <LocalCafe></LocalCafe> by {' '}
       <Link color="inherit" href="http://data.icmc.usp.br/">
-        Data ICMC
+        <strong style={{ textDecoration: 'underline' }}>Data ICMC</strong>
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -81,7 +82,8 @@ const useStyles = makeStyles(theme => ({
   },
   selectedButton: {
     backgroundColor: '#1DA1F2'
-  }
+  },
+
 
 
 
@@ -91,6 +93,8 @@ export default function App() {
   const classes = useStyles();
 
   const [selected, setSelected] = useState(0)
+
+  const [charCount, setCharNumber] = useState(0)
 
   const [personalities, setPersonality] = useState([{
     name: 'Donald Trump',
@@ -103,9 +107,57 @@ export default function App() {
     selected: false
   }])
 
+  const [tweets, setTweets] = useState([]);
 
+  const [curTweet, setCurTweet] = useState({author: 0, content: '', timeDate: ''})
 
-  const [tweets, setTweet] = useState([]);
+  const generateTweet = () => {
+
+    let tweetTime = generateTimeAndDate()
+
+    let newTweet = {
+        author: curTweet.author,
+        content: curTweet.content,
+        timeDate: tweetTime
+    }
+
+    setTweets([newTweet, ...tweets])
+
+  }
+
+  function deleteTweet(index){
+    let newTweets = [...tweets]
+
+    newTweets.splice(index, 1)
+
+    setTweets([...newTweets])
+  }
+
+  const generateTimeAndDate = () => {
+    var today = new Date();
+
+    var date = today.getDate() + '-' + (today.getMonth()+1) + '-'
+                + today.getFullYear();
+
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+    return date + ' ' + time;
+
+  }
+
+  const handleChange = (e) => {
+    setCurTweet({ author: selected, content: e.target.value})
+  }
+
+  const handleSelection = (index) => {
+    setSelected(index)
+    setCurTweet({ author: index, content: curTweet.content})
+  }
+
+  useEffect(() => {
+    let newCharCount = curTweet.content.length
+    setCharNumber(newCharCount)
+  }, [curTweet])
 
   return (
     <Container component="main" >
@@ -140,14 +192,17 @@ export default function App() {
                             variant="outlined"
                             // required
                             fullWidth
-
+                            onChange={handleChange}
                             id="firstName"
                             // label="First Name"
                             autoFocus
                             multiline
                             rows='6'
-
+                            inputProps={{
+                                maxLength: 250
+                            }}
                         />
+                        <FormHelperText id="outlined-weight-helper-text">{charCount}/250</FormHelperText>
                     </CardContent>
                     <CardActions>
                         <Grid container direction="row"
@@ -157,12 +212,13 @@ export default function App() {
                               {
                                 personalities.map((persona, index) =>
                                    <IconButton
-                                    onClick={() => setSelected(index)}
+                                    onClick={() => handleSelection(index)}
                                     className={
                                       (index === selected) ?
                                         classes.selectedButton
                                       :
-                                        {}}>
+                                        ''}
+                                    key={index}>
                                     <Avatar alt="Remy Sharp" src={persona.imgLink}  />
                                   </IconButton>
                                 )
@@ -171,7 +227,7 @@ export default function App() {
                             {/* </Grid> */}
 
                             {/* <Grid item xs={6} > */}
-                                <Fab variant="extended" aria-label="tweet" className={classes.fab}>
+                                <Fab variant="extended" aria-label="tweet" className={classes.fab} onClick={generateTweet}>
                                     <Twitter className={classes.extendedIcon}></Twitter>
                                     Tweetar
                                 </Fab>
@@ -194,8 +250,27 @@ export default function App() {
 
       <Card className={classes.card}>
         <CardContent>
-          <Typography className={classes.title}  gutterBottom>
+          <Typography className={classes.title} component='div' gutterBottom>
             Timeline
+
+
+
+            {
+                tweets.map((tweet, index) => (
+                    <div style={{margin: '2%'}} key={index}>
+
+                        <TweetCard
+                            avatar={personalities[tweet.author].imgLink}
+                            content={tweet.content}
+                            name={personalities[tweet.author].name}
+                            timeDate={tweet.timeDate}
+                            deleteTweet={(index) => deleteTweet(index)}
+                            index={index}
+                            // className={}
+                        ></TweetCard>
+                    </div>
+                ))
+            }
           </Typography>
         </CardContent>
       </Card>
