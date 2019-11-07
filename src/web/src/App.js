@@ -23,7 +23,12 @@ import Divider from '@material-ui/core/Divider';
 import Fab from '@material-ui/core/Fab';
 import Twitter from "@material-ui/icons/Twitter";
 import TweetCard from "./components/TweetCard/TweetCard";
-import FormHelperText from "@material-ui/core/FormHelperText"
+import FormHelperText from "@material-ui/core/FormHelperText";
+import bibliaIndexWord from "./assets/biblia/biblia-index_word.json";
+import bibliaWordIndex from "./assets/biblia/biblia-word_index.json";
+import PersonalityModelLoader from "./components/Tensorflow/PersonalityModelLoader"
+import axios from "axios"
+
 
 function Copyright() {
   return (
@@ -84,9 +89,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#1DA1F2'
   },
 
-
-
-
 }));
 
 export default function App() {
@@ -106,6 +108,8 @@ export default function App() {
     imgLink: 'http://lounge.obviousmag.org/yo_hablo/2016/05/30/1.jpg',
     selected: false
   }])
+
+  const [typingTimeout, setTypingTimeout] = useState(0)
 
   const [tweets, setTweets] = useState([]);
 
@@ -145,19 +149,43 @@ export default function App() {
 
   }
 
-  const handleChange = (e) => {
-    setCurTweet({ author: selected, content: e.target.value})
+  // Data fetching to predict the tweet from the Python Api endpoint.
+  const predictTweet = (value) => {
+    axios.post("http://localhost:1337/", { author: curTweet.author, content: value}).then((res) => {
+      console.log("Response:", res.data)
+    })
+    clearTimeout(typingTimeout)
   }
 
+
+  // Handles changes in the tweet field...
+  const handleChange = (e) => {
+
+    if (typingTimeout){
+      clearTimeout(typingTimeout)
+    }
+
+    setCurTweet({ author: selected, content: e.target.value});
+
+    const value = e.target.value;
+
+    setTypingTimeout(setTimeout(function(){
+      predictTweet(value)
+    }, 1000))
+  }
+
+  // Handles the changes in the selected personality
   const handleSelection = (index) => {
     setSelected(index)
     setCurTweet({ author: index, content: curTweet.content})
   }
 
+
   useEffect(() => {
     let newCharCount = curTweet.content.length
     setCharNumber(newCharCount)
   }, [curTweet])
+
 
   return (
     <Container component="main" >
