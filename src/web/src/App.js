@@ -24,9 +24,6 @@ import Fab from '@material-ui/core/Fab';
 import Twitter from "@material-ui/icons/Twitter";
 import TweetCard from "./components/TweetCard/TweetCard";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import bibliaIndexWord from "./assets/biblia/biblia-index_word.json";
-import bibliaWordIndex from "./assets/biblia/biblia-word_index.json";
-import PersonalityModelLoader from "./components/Tensorflow/PersonalityModelLoader"
 import axios from "axios"
 
 
