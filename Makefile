@@ -76,6 +76,16 @@ endif
 test_environment:
 	$(PYTHON_INTERPRETER) test_environment.py
 
+install:
+	npm install --prefix src/web
+
+web:
+	npm run start --prefix src/web
+
+server: 
+	$(PYTHON_INTERPRETER) src/web/api.py
+
+
 #################################################################################
 # PROJECT RULES                                                                 #
 #################################################################################
