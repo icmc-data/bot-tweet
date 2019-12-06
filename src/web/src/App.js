@@ -316,7 +316,7 @@ export default function App() {
                                                         value="modelVersion"
                                                         inputProps={{
                                                             "aria-label":
-                                                                "secondary checkbox"
+                                                                "primary checkbox"
                                                         }}
                                                     />
                                                 }
