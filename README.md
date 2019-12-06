@@ -1,7 +1,15 @@
+![bot-tweet demo](demo/demo700.gif)
+
 bot-tweet
 ==============================
+![MIT License Badge](https://img.shields.io/github/license/joaopedromattos/joker?style=for-the-badge) ![Data Badge](demo/dataLogo.png)
 
-A short description of the project.
+This is a project displayed at Data Day, a Data Science and Deep Learning event hosted by [Data](http://data.icmc.usp.br/),
+an extension group located at University of São Paulo, São Carlos, Brazil.
+
+The main idea is to mimetize the characteristics of famous writers by using Neural Networks and purpose the
+interaction with the models to happen as if the user was in a Twitter interface, by using the skills of the desired writer to compose tweets. This repo is already loaded with two PT-BR models ("Bíblia" and "Brás Cubas"), but our architecture can be
+used to any language with minor changes in our source code.
 
 Project Organization
 ------------
@@ -14,6 +22,8 @@ Project Organization
     │   ├── interim        <- Intermediate data that has been transformed.
     │   ├── processed      <- The final, canonical data sets for modeling.
     │   └── raw            <- The original, immutable data dump.
+    │
+    ├── demo               <- Used to host files used in README.md
     │
     ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
     │
@@ -53,5 +63,17 @@ Project Organization
 
 
 --------
+
+Setting-up the project
+------------
+- Run `make requirements`
+- Run `make install`
+
+Running the project
+------------
+- Open two terminals
+- In the first one, run `make web`
+- In the second one, run `make server`
+- A web page will be opened and you can use the predictions after the server has loaded completely.
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>

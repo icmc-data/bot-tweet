@@ -14,33 +14,11 @@ graph = None
 
 
 """
-    Function that returns the names of the index_word,
-    word_index and .h5 files.
-
-    Parameters: modelFiles -> a list of strings
-                              with the files in a certain folder
-    Return: index_word, word_index, .h5 file names
-"""
-
-
-def filterAndReturnNames(modelFiles):
-    index_word = list(filter(lambda x: ('index_word' in x), modelFiles))
-    index_word = index_word[0] if len(index_word) else index_word
-
-    word_index = list(filter(lambda x: ('word_index' in x), modelFiles))
-    word_index = word_index[0] if len(word_index) else word_index
-
-    modelPath = list(filter(lambda x: ('.h5' in x), modelFiles))
-    modelPath = modelPath[0] if len(modelPath) else modelPath
-    return index_word, word_index, modelPath
-
-
-"""
     Function responsible for loading our models from a given path
 """
 
 
-def loadModels(path):
+def loadModels():
 
     modelsDict = {
         'bras_cubas':
@@ -67,18 +45,6 @@ def loadModels(path):
                 'word_index': '',
                 'index_word': ''
             }
-        }
-    }
-    model = {
-        '40': {
-            'generator': '',
-            'word_index': '',
-            'index_word': ''
-        },
-        '80': {
-            'generator': '',
-            'word_index': '',
-            'index_word': ''
         }
     }
 
@@ -177,8 +143,8 @@ app = Flask(__name__)
 CORS(app)  # Defining CORS for the localhost domain...
 
 
-def init(path):
-    loadModels(path)
+def init():
+    loadModels()
 
 
 """
@@ -210,7 +176,7 @@ def predict():
 
 
 if __name__ == '__main__':
-    loadModels(sys.argv[1])
+    loadModels()
 
     app.run(debug=True, port=1337, threaded=True)
     del models

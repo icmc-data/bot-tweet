@@ -4,29 +4,27 @@ import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import IconButton from "@material-ui/core/IconButton";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import AccountCircle from "@material-ui/icons/AccountCircle";
+
 import LocalCafe from "@material-ui/icons/LocalCafe";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Divider from "@material-ui/core/Divider";
+
 import Fab from "@material-ui/core/Fab";
 import Twitter from "@material-ui/icons/Twitter";
 import TweetCard from "./components/TweetCard/TweetCard";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import axios from "axios";
 import Switch from "@material-ui/core/Switch";
-import { HotKeys } from "react-hotkeys";
 
 function Copyright() {
     return (
@@ -226,7 +224,7 @@ export default function App() {
           <LockOutlinedIcon />
         </Avatar> */}
                 <Typography component="h1" variant="h1">
-                    deep_tweet
+                    bot_tweet
                 </Typography>
 
                 <form className={classes.form} noValidate>
