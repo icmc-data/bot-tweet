@@ -4,7 +4,7 @@ bot-tweet
 ==============================
 ![MIT License Badge](https://img.shields.io/github/license/joaopedromattos/joker?style=for-the-badge) ![Data Badge](demo/dataLogo.png)
 
-This is a project displayed at Data Day, a Data Science and Deep Learning event hosted by [Data](http://data.icmc.usp.br/),
+This is a project displayed at Data Day (30/11/2019 - DD/MM/YYYY), a Data Science and Deep Learning event hosted by [Data](http://data.icmc.usp.br/),
 an extension group located at University of São Paulo, São Carlos, Brazil.
 
 The main idea is to mimetize the characteristics of famous writers by using Neural Networks and purpose the
@@ -33,6 +33,9 @@ Project Organization
     │                         the creator's initials, and a short `-` delimited description, e.g.
     │                         `1.0-jqp-initial-data-exploration`.
     │
+    ├── poster             <- Our poster displayed at Data Day (30/11/2019 - DD/MM/YYYY)
+    │
+    │
     ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
     │
     ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
@@ -56,6 +59,11 @@ Project Organization
     │   │   ├── predict_model.py
     │   │   └── train_model.py
     │   │
+    │   ├── web            <- React front-end and Python API 
+    │   │   │                 
+    │   │   ├── api.py     <- Python API
+    │   │   └── ...        <- All other files are related to React front-end
+    │   │
     │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
     │       └── visualize.py
     │
@@ -75,5 +83,21 @@ Running the project
 - In the first one, run `make web`
 - In the second one, run `make server`
 - A web page will be opened and you can use the predictions after the server has loaded completely.
+
+Software architecture
+------------
+![Software Architecture](demo/SoftwareArchiitecture.png)
+
+The figure above ilustrates our software architecture. It consists of a web page built with React and a Python API that loads and hosts our Keras models.
+
+This approach was used due to the lack of compatibility of Tensorflow.js with the Keras model we've built, so we decided to keep using our models in Python and create an API to make then modular to the front-end.
+
+Keras model architecture
+------------
+The models are available in full detail in `/notebooks` folder. You're free to look them up!
+
+Authors
+------------
+[Tobias Veiga](tobias.veiga@usp.br), [João Secundino](jp.secundino@usp.br), [João Pedro Mattos](joao_pedro_mattos@usp.br).
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
