@@ -98,6 +98,6 @@ The models are available in full detail in `/notebooks` folder. You're free to l
 
 Authors
 ------------
-[Tobias Veiga](tobias.veiga@usp.br), [João Secundino](jp.secundino@usp.br), [João Pedro Mattos](joao_pedro_mattos@usp.br).
+[Tobias Veiga](https://github.com/tobiasveiga), [João Secundino](https://github.com/jpsecundino), [João Pedro Mattos](https://github.com/joaopedromattos).
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
